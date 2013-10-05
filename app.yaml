@@ -4,5 +4,19 @@ runtime: php
 api_version: 1
 
 handlers:
+# favicon.ico support
+- url: /(favicon\.ico)
+  static_files: webapp/\1
+  upload: webapp/(favicon\.ico)
+
+# CSS
+- url: /css
+  static_dir: webapp/css
+
+# IMG
+- url: /img
+  static_dir: webapp/img
+
+# Main handler
 - url: /.*
   script: /webapp/index.php

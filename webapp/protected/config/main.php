@@ -32,6 +32,10 @@ return array(
 
 	// application components
 	'components'=>array(
+        'request'=>array(
+            'baseUrl' => 'http://localhost:8080',
+            'scriptUrl' => '/'
+        ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
