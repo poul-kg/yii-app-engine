@@ -4,8 +4,7 @@
 Explanation
 ------------
 
-Here I'm trying to create Yii application skeleton which will work with Google App Engine.
-Everybody welcome to experiment.
+Here I'm creating Yii application skeleton which will work with Google App Engine.
 
 ### My goals: ###
 
@@ -17,3 +16,4 @@ Everybody welcome to experiment.
 
 ### What's done ###
 * You can see the very first default Yii application page which you see if you execute ```yiic webpp myproject```
+* Logs are routed to syslog (no need to have runtime directory writable)
