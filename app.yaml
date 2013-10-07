@@ -1,4 +1,4 @@
-application: yii-appengine
+application: yii-framework
 version: 1
 runtime: php
 api_version: 1
@@ -19,4 +19,4 @@ handlers:
 
 # Main handler
 - url: /.*
-  script: /webapp/index.php
+  script: webapp/index.php

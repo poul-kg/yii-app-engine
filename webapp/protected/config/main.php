@@ -32,6 +32,11 @@ return array(
 
 	// application components
 	'components'=>array(
+        'assetManager'=>array(
+            'class'=>'application.components.CGAssetManager',
+            'basePath'=>'gs://yii-assets',
+            'baseUrl'=>'http://commondatastorage.googleapis.com/yii-assets'
+        ),
         'request'=>array(
             'baseUrl' => '',
             'scriptUrl' => '/',
@@ -72,7 +77,8 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CFileLogRoute',
+//					'class'=>'CFileLogRoute', // default
+					'class'=>'CSyslogRoute', // log errors to syslog (supported by Google App Engine)
 					'levels'=>'error, warning',
 				),
 				// uncomment the following to show log messages on web pages
