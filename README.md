@@ -4,9 +4,9 @@
 Explanation
 ------------
 
-Here I'm creating Yii application skeleton which will work with Google App Engine.
+Yii application skeleton which will work with Google App Engine.
 
-### My goals: ###
+### Goals: ###
 
 * create git repo of Yii application skeleton which you can clone and upload
   to Google App Engine and it will instantly work
@@ -17,3 +17,4 @@ Here I'm creating Yii application skeleton which will work with Google App Engin
 ### What's done ###
 * You can see the very first default Yii application page which you see if you execute ```yiic webpp myproject```
 * Logs are routed to syslog (no need to have runtime directory writable)
+* Assets are published to Google Cloud Storage instead of local assets folder.
