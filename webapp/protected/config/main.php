@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Yii on Google App Engine',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -33,8 +33,12 @@ return array(
 	// application components
 	'components'=>array(
         'assetManager'=>array(
+            // This is special Asset Manger which can work under Google App Engine
             'class'=>'application.components.CGAssetManager',
+            // CHANGE THIS: Enter here your own Google Cloud Storage bucket name Google App Engine
             'basePath'=>'gs://yii-assets',
+            // CHANGE THIS: All files on Google Cloud Storage can be accessed via the URL below,
+            // note the bucket name at the end, should be the save as in basePath above
             'baseUrl'=>'http://commondatastorage.googleapis.com/yii-assets'
         ),
         'request'=>array(
@@ -46,16 +50,17 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
+
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+            'baseUrl'=>'', // added to fix URL issues under Google App Engine
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
+
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
