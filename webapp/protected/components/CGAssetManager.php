@@ -132,11 +132,11 @@ class CGAssetManager extends CAssetManager
             }
             elseif(is_dir($src))
             {
-                if($this->linkAssets && !is_dir($dstDir))
+                if($this->linkAssets && !$this->isDstDir($dstDir))
                 {
                     symlink($src,$dstDir);
                 }
-                elseif(!is_dir($dstDir) || $forceCopy)
+                elseif(!$this->isDstDir($dstDir) || $forceCopy)
                 {
                     CGFileHelper::copyDirectory($src,$dstDir,array(
                         'exclude'=>$this->excludeFiles,
@@ -151,5 +151,26 @@ class CGAssetManager extends CAssetManager
         }
         throw new CException(Yii::t('yii','The asset "{asset}" to be published does not exist.',
             array('{asset}'=>$path)));
+    }
+
+
+    /**
+     * This method should be used here only to test dstDirectory, not srcDirectory
+     * This method was added to be able to run AssetManager on local development Google App Engine version
+     * which has one bug related to is_dir() function
+     * @param $dstDir
+     * @return bool
+     */
+    public function isDstDir($dstDir)
+    {
+        if (false === strpos($dstDir, 'gs://')) {
+            // if not Google Cloud Storage, then use native is_dir()
+            return is_dir($dstDir);
+        } else {
+            // Google Cloud Storage Path
+            // Local development version of Google App Engine 1.8.5 has a bug which crashes the whole app when
+            // is_dir() function is used, so we always return true here
+            return true;
+        }
     }
 } 

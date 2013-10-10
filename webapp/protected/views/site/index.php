@@ -18,3 +18,9 @@ $this->pageTitle=Yii::app()->name;
 the <a href="http://www.yiiframework.com/doc/">documentation</a>.
 Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
 should you have any questions.</p>
+
+<h3><a href="https://gaeforphp.appspot.com/">Find out more about Google App Engine for PHP</a></h3>
+
+<a class="p6n-product-home-link" href="https://cloud.google.com/console">
+    <img src="//www.google.com/images/logos/google_logo_41.png" alt="Google">Cloud Console
+</a>
