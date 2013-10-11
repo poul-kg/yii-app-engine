@@ -2,6 +2,7 @@
 /* @var $this SiteController */
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
+/* @var $googleLoginUrl string */
 
 $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
@@ -47,6 +48,7 @@ $this->breadcrumbs=array(
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login'); ?>
+        <?php echo CHtml::link('Login with Google', $googleLoginUrl); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

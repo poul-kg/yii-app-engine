@@ -3,6 +3,14 @@
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
+// check environment dev or production
+if (strpos(getenv("SERVER_SOFTWARE"), 'Development') === 0) {
+    define('ENV_DEV', true); // we are on development machine
+} else {
+    define('ENV_DEV', false); // we are on production server
+}
+
+
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
@@ -36,10 +44,15 @@ return array(
             // This is special Asset Manger which can work under Google App Engine
             'class'=>'application.components.CGAssetManager',
             // CHANGE THIS: Enter here your own Google Cloud Storage bucket name Google App Engine
-            'basePath'=>'gs://yii-assets',
+            'basePath'=>ENV_DEV
+                    ? 'assets'              // basePath for development version
+                    : 'gs://yii-assets',    // basePath for production version
             // CHANGE THIS: All files on Google Cloud Storage can be accessed via the URL below,
-            // note the bucket name at the end, should be the save as in basePath above
-            'baseUrl'=>'http://commondatastorage.googleapis.com/yii-assets'
+            // note the bucket name at the end, should be the same as in basePath above
+            'baseUrl'=>ENV_DEV
+                    ? '/assets'                                            // baseUrl for development App Engine
+                    : 'http://commondatastorage.googleapis.com/yii-assets' // baseUrl for production App Engine
+
         ),
         'request'=>array(
             'baseUrl' => '/',

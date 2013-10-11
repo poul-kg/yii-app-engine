@@ -78,7 +78,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
+        $model=new LoginForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -95,8 +95,11 @@ class SiteController extends Controller
 			if($model->validate() && $model->login())
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
+
+        require_once 'google/appengine/api/users/UserService.php';
+        $googleLoginUrl = \google\appengine\api\users\UserService::createLoginURL('/site/googleLogin');
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->render('login',array('model'=>$model, 'googleLoginUrl'=>$googleLoginUrl));
 	}
 
 	/**
@@ -107,4 +110,17 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+    public function actionGoogleLogin()
+    {
+        $identity=new GUserIdentity('test','test');
+        $identity->authenticate();
+        if($identity->errorCode===GUserIdentity::ERROR_NONE) {
+            Yii::app()->user->login($identity,$duration=0);
+            $this->redirect('/');
+        } else {
+            $this->redirect('/site/login');
+        }
+
+    }
 }

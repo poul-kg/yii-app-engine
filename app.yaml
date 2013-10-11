@@ -9,6 +9,10 @@ handlers:
   static_files: webapp/\1
   upload: webapp/(favicon\.ico)
 
+- url: /assets/(.+)
+  static_files: webapp/assets/\1
+  upload: webapp/assets/(.+)
+
 # CSS
 - url: /css
   static_dir: webapp/css
