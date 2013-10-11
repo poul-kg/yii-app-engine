@@ -42,7 +42,7 @@ return array(
             'baseUrl'=>'http://commondatastorage.googleapis.com/yii-assets'
         ),
         'request'=>array(
-            'baseUrl' => '',
+            'baseUrl' => '/',
             'scriptUrl' => '/',
         ),
 		'user'=>array(

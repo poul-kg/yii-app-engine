@@ -2,10 +2,6 @@
 
 class SiteController extends Controller
 {
-    public function init()
-    {
-        Yii::app()->request->setBaseUrl('/');
-    }
 	/**
 	 * Declares class-based actions.
 	 */
