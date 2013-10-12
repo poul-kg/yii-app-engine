@@ -28,14 +28,13 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'Enter Your Password Here',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		*/
+        'demo' // Yii on Google App Engine demo module
 	),
 
 	// application components
@@ -74,19 +73,24 @@ return array(
 			),
 		),
 
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
+//		'db'=>array(
+//			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
+//		),
 		// uncomment the following to use a MySQL database
-		/*
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+			'connectionString' => ENV_DEV
+                    // local development server connection string
+                    ? 'mysql:host=localhost;dbname=yii-appengine'
+                    // App Engine Cloud SQL connection string
+                    // explanation:
+                    // yii-framework - here is a name of App Engine project
+                    // db - here is the name of Cloud SQL instance
+                    : 'mysql:unix_socket=/cloudsql/yii-framework:db;charset=utf8',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'dbusername',
+			'password' => 'dbpassword',
 			'charset' => 'utf8',
 		),
-		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
