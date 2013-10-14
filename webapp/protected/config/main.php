@@ -1,7 +1,9 @@
 <?php
-
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
+
+// define path to assets
+Yii::setPathOfAlias('assets', realpath(dirname(__FILE__) . '/../../assets'));
 
 // check environment dev or production
 if (strpos(getenv("SERVER_SOFTWARE"), 'Development') === 0) {
@@ -44,7 +46,7 @@ return array(
             'class'=>'application.components.CGAssetManager',
             // CHANGE THIS: Enter here your own Google Cloud Storage bucket name Google App Engine
             'basePath'=>ENV_DEV
-                    ? 'assets'              // basePath for development version
+                    ? Yii::getPathOfAlias('assets')   // basePath for development version, assets path alias was defined above
                     : 'gs://yii-assets',    // basePath for production version
             // CHANGE THIS: All files on Google Cloud Storage can be accessed via the URL below,
             // note the bucket name at the end, should be the same as in basePath above
