@@ -115,11 +115,11 @@ class CGAssetManager extends CAssetManager
                 $fileName=basename($src);
                 $dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
 
-//                if(!is_dir($dstDir))
-//                {
-//                    mkdir($dstDir,$this->newDirMode,true);
-//                    @chmod($dstDir,$this->newDirMode);
-//                }
+                if(!$this->isDstDir($dstDir))
+                {
+                    mkdir($dstDir,$this->newDirMode,true);
+                    @chmod($dstDir,$this->newDirMode);
+                }
 
                 if($this->linkAssets && !is_file($dstFile)) symlink($src,$dstFile);
                 elseif(@filemtime($dstFile)<@filemtime($src))
