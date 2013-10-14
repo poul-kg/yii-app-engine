@@ -1,10 +1,9 @@
 [PHP] Yii Framework application skeleton which can work with Google App Engine
 ===============================================================================
 
-Explanation
-------------
+### Demo ###
 
-Yii application skeleton which will work with Google App Engine.
+[Live Demo](http://yii-framework.appspot.com/)
 
 ### Goals: ###
 
@@ -18,3 +17,11 @@ Yii application skeleton which will work with Google App Engine.
 * You can see the very first default Yii application page which you see if you execute ```yiic webpp myproject```
 * Logs are routed to syslog (no need to have runtime directory writable)
 * Assets are published to Google Cloud Storage instead of local assets folder.
+
+### TODO ###
+* switch default page to /demo/default/index
+* make cool looking bootstrap front page (with links to github)
+* add Google Login button with icon
+* logged in user will be able to change it's own details
+* user data will be stored in Cloud SQL
+* better documentation
