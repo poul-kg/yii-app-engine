@@ -123,4 +123,24 @@ class SiteController extends Controller
         }
 
     }
+
+    public function actionTest()
+    {
+        echo '<pre>';
+        echo "is_file('gs://yii-assets/dir/file.txt');";
+        var_dump(is_file('gs://yii-assets/dir/file.txt'));
+
+        echo "is_dir('gs://yii-assets/dir');";
+        var_dump(is_dir('gs://yii-assets/dir'));
+
+        echo "is_file('gs://yii-assets/nodir/nofile.txt');";
+        var_dump(is_file('gs://yii-assets/nodir/nofile.txt'));
+
+        echo "is_dir('gs://yii-assets/nodir');";
+        var_dump(is_dir('gs://yii-assets/nodir'));
+
+        echo "filemtime('gs://yii-assets/dir/file.txt');";
+        var_dump(filemtime('gs://yii-assets/dir/file.txt'));
+        echo '</pre>';
+    }
 }

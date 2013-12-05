@@ -45,7 +45,7 @@ class CGAssetManager extends CAssetManager
         if(is_null($this->_basePath))
         {
             if (preg_match('/Google App Engine/', getenv("SERVER_SOFTWARE"))) {
-                // there is not way to detect base path of asset manager from Google App Engine
+                // there is no way to detect base path of asset manager from Google App Engine
                 // the only way is to specify it in configuration file
                 throw new Exception(__CLASS__ . ' was not configured with proper basePath');
             } else {
@@ -110,12 +110,13 @@ class CGAssetManager extends CAssetManager
         {
             $dir=$this->generatePath($src,$hashByName);
             $dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
+
             if(is_file($src))
             {
                 $fileName=basename($src);
                 $dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
 
-                if(!$this->isDstDir($dstDir))
+                if(!is_dir($dstDir))
                 {
                     mkdir($dstDir,$this->newDirMode,true);
                     @chmod($dstDir,$this->newDirMode);
@@ -132,12 +133,14 @@ class CGAssetManager extends CAssetManager
             }
             elseif(is_dir($src))
             {
-                if($this->linkAssets && !$this->isDstDir($dstDir))
+                if($this->linkAssets && !is_dir($dstDir))
                 {
+//                    exit('link');
                     symlink($src,$dstDir);
                 }
-                elseif(!$this->isDstDir($dstDir) || $forceCopy)
+                elseif(!is_dir($dstDir) || $forceCopy)
                 {
+//                    exit('copyDir');
                     CGFileHelper::copyDirectory($src,$dstDir,array(
                         'exclude'=>$this->excludeFiles,
                         'level'=>$level,
@@ -151,26 +154,5 @@ class CGAssetManager extends CAssetManager
         }
         throw new CException(Yii::t('yii','The asset "{asset}" to be published does not exist.',
             array('{asset}'=>$path)));
-    }
-
-
-    /**
-     * This method should be used here only to test dstDirectory, not srcDirectory
-     * This method was added to be able to run AssetManager on local development Google App Engine version
-     * which has one bug related to is_dir() function
-     * @param $dstDir
-     * @return bool
-     */
-    public function isDstDir($dstDir)
-    {
-        if (false === strpos($dstDir, 'gs://')) {
-            // if not Google Cloud Storage, then use native is_dir()
-            return is_dir($dstDir);
-        } else {
-            // Google Cloud Storage Path
-            // Local development version of Google App Engine 1.8.5 has a bug which crashes the whole app when
-            // is_dir() function is used, so we always return true here
-            return true;
-        }
     }
 } 
