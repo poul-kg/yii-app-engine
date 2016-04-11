@@ -5,10 +5,12 @@
  * environment. Here we use some code which can deal with Google Cloud Storage instead of local file system,
  * for more info see this help from Google: https://developers.google.com/appengine/docs/php/googlestorage/
  *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @link http://www.yiiframework.com/
+ * @author    Qiang Xue <qiang.xue@gmail.com>
+ * @author    Dzhuneyt <dzhuneyt@dzhuneyt.com>
+ *
+ * @link      http://www.yiiframework.com/
  * @copyright 2008-2013 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @license   http://www.yiiframework.com/license/
  */
 
 /**
@@ -349,12 +351,16 @@ class CGFileHelper
      * @param string $src
      * @param string $dst gs://bucket/dir1/dir2/file like path
      */
-    private static function gCopy($src, $dst)
-    {
-        $file = basename($dst);
-        $options = [ 'gs' => [ 'Content-Type' => self::getMimeType($file) , 'acl' => 'public-read']];
-        $ctx = stream_context_create($options);
-        copy($src,$dst,$ctx);
+    private static function gCopy ( $src, $dst ) {
+        $file      = basename( $dst );
+        $mimeType  = self::getMimeType( $file );
+        $gsOptions = [ 'acl' => 'public-read' ];
+        if( $mimeType ) {
+            $gsOptions['Content-Type'] = $mimeType;
+        }
+        $options = [ 'gs' => $gsOptions ];
+        $ctx     = stream_context_create( $options );
+        copy( $src, $dst, $ctx );
     }
 
 }

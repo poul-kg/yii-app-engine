@@ -52,7 +52,7 @@ return array(
             // note the bucket name at the end, should be the same as in basePath above
             'baseUrl'=>ENV_DEV
                     ? '/assets'                                            // baseUrl for development App Engine
-                    : 'http://commondatastorage.googleapis.com/yii-assets' // baseUrl for production App Engine
+                    : '//commondatastorage.googleapis.com/yii-assets' // baseUrl for production App Engine
 
         ),
         'request'=>array(
